@@ -1,0 +1,177 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    Home - My Django App
+{% endblock %}
+
+<style>
+
+    
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+      }
+  
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .shop_category{
+        background: red;
+      }
+      .mobiles{
+        background: green;
+      }
+</style>
+
+{% block content %}
+
+<style>
+    .shop_category_container {
+        overflow: hidden;
+    }
+    .shop_category{
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 5rem;
+        background: white;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 21px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+    .products{
+        margin: 18px 0;
+    }
+
+    @media (max-width: 768px) {
+        .shop_category {
+            justify-content: flex-start;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 2rem;
+        }
+    
+        .shop_category > div {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+        }
+    
+        .shop_category img {
+            max-width: 100px;
+        }
+    }
+</style>
+
+    <section>
+        <div class="shop_category_container">
+            <div class="shop_category">
+              <div class="mobiles">
+                <img src="{% static 'images/mobiles.webp' %}" alt="">
+                <p>Mobiles</p>
+              </div>
+              <div class="fashion">
+                <img src="{% static 'images/fashion.webp' %}" alt="">
+                <p>Fashion</p>
+              </div>
+              <div class="electronics">
+                <img src="{% static 'images/electronics.webp' %}" alt="">
+                <p>Electronics</p>
+              </div>
+              <div class="home_decor">
+                <img src="{% static 'images/homedecor.webp' %}" alt="">
+                <p>Furnitures</p>
+              </div>
+              <div class="appliances">
+                <img src="{% static 'images/appliances.webp' %}" alt="">
+                <p>Home appliances</p>
+              </div>
+              <div class="toys">
+                <img src="{% static 'images/toys.webp' %}" alt="">
+                <p>Toys & More</p>
+              </div>
+            </div>
+        </div>
+        <div class="banner_slider">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide"><img src="{% static 'images/slider1.webp' %}" alt="" width="100%"></div>
+                  <div class="swiper-slide"><img src="{% static 'images/slider2.webp' %}" alt="" width="100%"></div>
+                  <div class="swiper-slide"><img src="{% static 'images/slider3.webp' %}" alt="" width="100%"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+        </div>
+
+        <div class="products">
+           <div class="row">
+            <div class="col-lg-12">
+                <div class="card" style="padding: 10px;">
+                  <h5>Best of Electronics</h5>
+                  <div class="row products_card">
+                    <div class="col-lg-2">
+                        <div class="card">
+                            <img src="{% static 'images/products/camera.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="card">
+                            <img src="{% static 'images/products/headphone.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="card">
+                            <img src="{% static 'images/products/bt_speaker.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="card">
+                            <img src="{% static 'images/products/ipad.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="card">
+                            <img src="{% static 'images/products/watch_A.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="card">
+                            <img src="{% static 'images/products/macbook.png' %}" alt="">
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+           </div>
+        </div>
+
+        
+    </section>
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+              },
+          pagination: {
+            el: ".swiper-pagination",
+          },
+        });
+      </script>
+{% endblock %}

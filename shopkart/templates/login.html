@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Login - My Django App{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-3">
+     <div class="col-sm-6 offset-sm-3">
+      <h3>Login</h3>
+      <hr>
+      <div  method="post" novalidate class="shadow p-5">
+       
+       <div class="mb-3">
+        <label for="" class="form-label">Username</label>
+        <input type="text" class="form-control" name='uname' id="username" aria-describedby="emailHelp">
+       </div>
+       <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name='pass'>
+       </div>
+       <small><a href="#">Forgot Password ?</a></small> <br>
+       <input type="submit" class="btn btn-primary mt-4" id="login_btn" value="Login" style="background: #003d29; color: white; border: white;">
+       <br>
+       <div class="text-center text-primary fw-bold"><small>New to Shopkart ? <a href="#"
+          class="text-danger">Create an Account</a> </small></div>
+       </div>
+     </div>
+    </div>
+   </div>
+
+   <script>
+    $(document).ready(function () {
+        $("#login_btn").click(function () {
+            user_login()
+        })
+
+        function user_login(){
+
+            var user_name = $("#username").val()
+            var password = $("#password").val()
+            $.ajax({
+                type: "POST",
+                url: "/login",
+                data: {
+                    'username': user_name,
+                    'password': password,
+                   
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                    window.location.href = '/';  // Redirect to the homepage or another page
+                   } 
+                  else {
+                    $('#error-message').text(response.error);
+                  }
+                }
+            });
+        }
+    });
+   </script>
+{% endblock %}

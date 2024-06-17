@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Signup - My Django App{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-3">
+     <div class="col-sm-6 offset-sm-3">
+      <h3>Customer Registration</h3>
+      <hr>
+   
+      <div novalidate class="shadow p-5">
+        
+       <div class="mb-3">
+        <label for="inputUsername" class="form-label">Username</label>
+        <input type="text" class="form-control" id="inputUsername" name='username'>
+       </div>
+       <div class="mb-3">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail4" name='mail'>
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+       </div>
+       <div class="mb-3">
+        <label for="inputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword1" name='pass'>
+       </div>
+       <div class="mb-3">
+        <label for="inputPassword2" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="inputPassword2" name='cpass'>
+       </div>
+       <div class="text-end">
+        <button type="submit" id="register_btn" class="btn btn-danger">Submit</button>
+       </div>
+       <br>
+       <div class="text-center text-primary fw-bold"><small>Existing User ? <a href=""
+          class="text-danger">Login Now</a> </small></div>
+    
+       </div>
+     </div>
+    </div>
+</div>
+<script>
+$(document).ready(function () {
+    $("#register_btn").click(function(){
+        registration()
+    })
+
+    function registration() {
+
+        var usr_name = $("#inputUsername").val()
+        var email_id = $("#inputEmail4").val()
+        var password = $("#inputPassword1").val()
+        var confirm_password = $("#inputPassword2").val()
+
+        if (password !== confirm_password) {
+        // $('#error-message').text('Passwords do not match');
+        alert("password is not matching")
+        return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/signup",
+            data: {
+            'username': usr_name,
+            'email': email_id,
+            'password': password,
+            },
+            dataType: "json",
+            success: function (response) {
+                 $("#inputUsername").val("")
+                 $("#inputEmail4").val("")
+                 $("#inputPassword1").val("")
+                 $("#inputPassword2").val("")
+                 alert("account successfully created")
+                 window.location.href = '/login';
+            }
+        });
+    }
+});
+</script>
+
+{% endblock %}
